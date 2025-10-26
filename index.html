@@ -378,16 +378,17 @@
         });
 
         function saveToContacts() {
-            // Create vCard content
+            // Create vCard content with proper formatting
             const vCard = `BEGIN:VCARD
 VERSION:3.0
+N:Zhang;George;;;
 FN:George Zhang
 ORG:YONG Real Estate
 TITLE:Licensed Real Estate Agent
-TEL:0433773352
+TEL;TYPE=CELL:0433773352
 EMAIL:george.zhang@yong.com.au
-ADR:;;Pacific Centre, Suite 18, 223 Calam Rd;Sunnybank Hills;QLD;4109;Australia
-NOTE:"2 In 1 Solution" - 中英文服务
+ADR;TYPE=WORK:;;Pacific Centre, Suite 18, 223 Calam Rd;Sunnybank Hills;QLD;4109;Australia
+NOTE:"2 In 1 Solution" - Bilingual Service (English/Chinese)
 URL:https://www.yong.com.au
 END:VCARD`;
 
@@ -396,7 +397,7 @@ END:VCARD`;
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'George_Zhang_Contact.vcf';
+            link.download = 'George_Zhang.vcf';
             
             // Trigger download
             document.body.appendChild(link);
