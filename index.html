@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>George Zhang - YONG Real Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 380px;
+            width: 100%;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f1f3f4;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: #d32f2f;
+            color: white;
+            padding: 30px 25px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .company-logo {
+            height: 50px;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .tagline {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .agent-info {
+            text-align: left;
+        }
+
+        .agent-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .title {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .language-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #d32f2f;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .contact-info {
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 14px;
+            border-radius: 12px;
+            transition: background 0.2s ease;
+            border: 1px solid #f1f3f4;
+        }
+
+        .contact-item:hover {
+            background: #f8f9fa;
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            background: #f1f3f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #d32f2f;
+            font-size: 16px;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .contact-value {
+            font-size: 14px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .save-contact-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .save-contact-btn:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+        }
+
+        .chinese-content {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .card-header {
+                padding: 25px 20px 20px;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+            
+            .agent-name {
+                font-size: 18px;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            
+            .agent-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-card">
+        <div class="card-header">
+            <div class="language-toggle">
+                <button class="lang-btn active" id="btn-en">EN</button>
+                <button class="lang-btn" id="btn-cn">中文</button>
+            </div>
+            
+            <img src="https://www.yong.com.au/_assets/8158/images/kirra.png" alt="YONG Real Estate" class="company-logo">
+            <div class="company-name">YONG</div>
+            <div class="tagline">"2 In 1 Solution"</div>
+            
+            <div class="profile-section">
+                <img src="https://assets.zyrosite.com/YrDJMy25kPhj3eb1/whatsapp-image-2025-10-25-at-3.29.43-pm-YNqMKryMQJsl0R9b.jpeg" alt="George Zhang" class="profile-image">
+                <div class="agent-info">
+                    <div class="agent-name">George Zhang</div>
+                    <div class="title">Licensed Real Estate Agent</div>
+                    <div class="language-badge">中英文</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!-- English Content -->
+            <div class="english-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-label">Phone</div>
+                            <div class="contact-value">0433 773 352</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">george.zhang@yong.com.au</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-label">Office Address</div>
+                            <div class="contact-value">Pacific Centre, Suite 18<br>223 Calam Rd, Sunnybank Hills QLD 4109</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="save-contact-btn" onclick="saveToContacts()">
+                    <i class="fas fa-save"></i>
+                    Save to Contacts
+                </button>
+            </div>
+            
+            <!-- Chinese Content -->
+            <div class="chinese-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-label">电话</div>
+                            <div class="contact-value">0433 773 352</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-label">电子邮箱</div>
+                            <div class="contact-value">george.zhang@yong.com.au</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-label">办公室地址</div>
+                            <div class="contact-value">太平洋中心, 18号套房<br>223 Calam Rd, Sunnybank Hills QLD 4109</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="save-contact-btn" onclick="saveToContacts()">
+                    <i class="fas fa-save"></i>
+                    保存到通讯录
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language switching functionality
+        document.getElementById('btn-en').addEventListener('click', function() {
+            document.querySelector('.english-content').style.display = 'block';
+            document.querySelector('.chinese-content').style.display = 'none';
+            document.getElementById('btn-en').classList.add('active');
+            document.getElementById('btn-cn').classList.remove('active');
+            
+            // Update header text for English
+            document.querySelector('.company-name').textContent = 'YONG';
+            document.querySelector('.tagline').textContent = '"2 In 1 Solution"';
+            document.querySelector('.agent-name').textContent = 'George Zhang';
+            document.querySelector('.title').textContent = 'Licensed Real Estate Agent';
+            document.querySelector('.language-badge').textContent = '中英文';
+        });
+
+        document.getElementById('btn-cn').addEventListener('click', function() {
+            document.querySelector('.english-content').style.display = 'none';
+            document.querySelector('.chinese-content').style.display = 'block';
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-cn').classList.add('active');
+            
+            // Update header text for Chinese
+            document.querySelector('.company-name').textContent = '永';
+            document.querySelector('.tagline').textContent = '"二合一解决方案"';
+            document.querySelector('.agent-name').textContent = '张乔治';
+            document.querySelector('.title').textContent = '持牌房地产经纪人';
+            document.querySelector('.language-badge').textContent = '中英文';
+        });
+
+        function saveToContacts() {
+            // Create vCard content
+            const vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:George Zhang
+ORG:YONG Real Estate
+TITLE:Licensed Real Estate Agent
+TEL:0433773352
+EMAIL:george.zhang@yong.com.au
+ADR:;;Pacific Centre, Suite 18, 223 Calam Rd;Sunnybank Hills;QLD;4109;Australia
+NOTE:"2 In 1 Solution" - 中英文服务
+URL:https://www.yong.com.au
+END:VCARD`;
+
+            // Create blob and download link
+            const blob = new Blob([vCard], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'George_Zhang_Contact.vcf';
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+
+            // Show confirmation in appropriate language
+            const isChinese = document.querySelector('.chinese-content').style.display === 'block';
+            if (isChinese) {
+                alert('联系人卡片已下载！请打开.vcf文件保存到您的通讯录。');
+            } else {
+                alert('Contact card downloaded! Please open the .vcf file to save to your contacts.');
+            }
+        }
+
+        // Add click-to-call and click-to-email functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make phone numbers clickable
+            const phoneItems = document.querySelectorAll('.contact-item .contact-value');
+            phoneItems.forEach(item => {
+                // Check if this is a phone item by looking at the label
+                const label = item.previousElementSibling.textContent;
+                if (label.includes('Phone') || label.includes('电话')) {
+                    item.style.cursor = 'pointer';
+                    item.addEventListener('click', function() {
+                        window.open('tel:0433773352');
+                    });
+                }
+            });
+
+            // Make emails clickable
+            const emailItems = document.querySelectorAll('.contact-item .contact-value');
+            emailItems.forEach(item => {
+                // Check if this is an email item by looking at the label
+                const label = item.previousElementSibling.textContent;
+                if (label.includes('Email') || label.includes('邮箱')) {
+                    item.style.cursor = 'pointer';
+                    item.addEventListener('click', function() {
+                        window.open('mailto:george.zhang@yong.com.au');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
